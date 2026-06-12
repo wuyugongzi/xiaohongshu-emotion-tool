@@ -1,118 +1,167 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>小红书情感图文生成器</title>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>小红书情感爆款生成器 Pro</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f0f2f5;padding:12px}
-.h{max-width:1200px;margin:0 auto 16px;padding:20px;background:linear-gradient(135deg,#FF6B9D,#C44A8B);border-radius:14px;color:#fff}
-.h h1{font-size:22px;font-weight:700}
-.l{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:16px}
-.p{background:#fff;border-radius:12px;padding:14px}
-.f{margin-bottom:10px}.f label{display:block;font-size:11px;font-weight:500;margin-bottom:3px;color:#888}
-.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:10px}
-.to{border:2px solid #eee;border-radius:8px;padding:6px 2px;text-align:center;cursor:pointer;font-size:9px;color:#999;background:#fafafa}
-.to.s,.to:hover{border-color:#FF6B9D;background:#fff0f5;color:#C44A8B}
-.to .i{font-size:12px;display:block}
-.bgg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-height:150px;overflow-y:auto}
-.bgo{border:2px solid #eee;border-radius:6px;padding:4px;text-align:center;cursor:pointer;font-size:8px;color:#999;height:35px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.bgo.s,.bgo:hover{border-color:#FF6B9D}
-.bgp{width:30px;height:10px;border-radius:3px;margin-bottom:2px}
-.b{display:inline-block;padding:6px 12px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;margin:2px}
-.b1{background:linear-gradient(135deg,#FF6B9D,#C44A8B);color:#fff}
-.b2{background:#10b981;color:#fff}
-.b3{background:#667eea;color:#fff}
-.b4{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;padding:10px;min-height:100vh}
+.h{max-width:1300px;margin:0 auto 12px;padding:16px 20px;background:linear-gradient(135deg,#ff6b9d,#c44569);border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.h h1{font-size:20px;font-weight:700}
+.h .btns{display:flex;gap:6px;flex-wrap:wrap}
+.l{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:250px 1fr;gap:12px}
+@media(max-width:768px){.l{grid-template-columns:1fr}}
+.p{background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.f{margin-bottom:10px}
+.f label{display:block;font-size:11px;font-weight:600;margin-bottom:4px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:10px}
+.to{border:2px solid #eee;border-radius:6px;padding:5px 2px;text-align:center;cursor:pointer;font-size:9px;color:#999;background:#fafafa;transition:all .15s;line-height:1.3}
+.to.s,.to:hover{border-color:#ff6b9d;background:#fff0f5;color:#c44569;transform:scale(1.02)}
+.to .i{font-size:14px;display:block;margin-bottom:1px}
+.bgg{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-height:140px;overflow-y:auto}
+.bgo{border:2px solid #eee;border-radius:6px;padding:3px;text-align:center;cursor:pointer;font-size:8px;color:#999;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .15s}
+.bgo.s,.bgo:hover{border-color:#ff6b9d;transform:scale(1.03)}
+.bgo .bgp{width:18px;height:18px;border-radius:50%;margin-bottom:2px;border:1px solid rgba(0,0,0,.08)}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:7px 14px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-pink{background:linear-gradient(135deg,#ff6b9d,#c44569);color:#fff}
+.btn-green{background:#10b981;color:#fff}
+.btn-purple{background:#8b5cf6;color:#fff}
+.btn-orange{background:#f59e0b;color:#fff}
+.btn-gray{background:#e5e7eb;color:#555}
 .br{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap}
-.br input{width:50px;padding:4px 6px;border:1px solid #e8e8e8;border-radius:6px;font-size:11px;text-align:center}
-.ca{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.cd{width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column;padding:22px 14px}
-.cw{margin-bottom:10px}
-.cw .cb{display:flex;gap:4px;margin-top:4px;justify-content:center}
-.cw .cb button{padding:2px 5px;font-size:9px;border:none;border-radius:4px;cursor:pointer;background:#f0f0f0;color:#666}
-.em{grid-column:1/-1;text-align:center;padding:40px;color:#bbb}
-.cl{max-height:200px;overflow-y:auto;margin-bottom:10px}
-.ci{padding:5px 8px;border:1px solid #f0f0f0;border-radius:6px;margin-bottom:3px;cursor:pointer}
-.ci:hover{background:#fff0f5;border-color:#FF6B9D}
-.ci .cm{font-size:11px;font-weight:500}.ci .cs{font-size:9px;color:#999}
-</style></head><body>
-<div class=h><h1>小红书情感图文生成器</h1></div>
-<div class=l><div class=p>
-<div class=f><label>模板</label><div class=tg id=tplList></div></div>
-<div class=f><label>背景</label><div class=bgg id=bgList></div></div>
-<div class=f><label>素材库</label><div class=cl id=contentList></div></div>
-<div class=br>
-<button class="b b1" id=btnGen>生成</button>
-<button class="b b2" id=btnBatch>批量</button><input id=bcnt type=number value=10 min=1 max=200><label>张</label>
-<button class="b b3" id=btnDownAll>批量下载PNG</button>
+.br input{width:56px;padding:5px 8px;border:1px solid #ddd;border-radius:6px;font-size:12px;text-align:center}
+.ca{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.cd{width:100%;aspect-ratio:3/4;border-radius:12px;overflow:hidden;position:relative;display:flex;flex-direction:column;padding:28px 18px 70px 18px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.cw{margin-bottom:4px}
+.cw .cb{display:flex;gap:4px;margin-top:3px;justify-content:center}
+.cw .cb button{padding:3px 8px;font-size:10px;border:none;border-radius:4px;cursor:pointer;background:#f0f0f0;color:#666;font-weight:500}
+.cw .cb button:hover{background:#ff6b9d;color:#fff}
+.cw .cb .del-btn:hover{background:#ef4444}
+.em{grid-column:1/-1;text-align:center;padding:48px 20px;color:#ccc;font-size:14px}
+.cl{max-height:220px;overflow-y:auto}
+.ci{padding:5px 8px;border:1px solid #f0f0f0;border-radius:6px;margin-bottom:3px;cursor:pointer;transition:all .1s;font-size:11px}
+.ci:hover{background:#fff0f5;border-color:#ff6b9d}
+.ci .t{font-weight:600;font-size:12px}
+.ci .d{color:#aaa;font-size:10px;margin-top:1px}
+.card-title{font-weight:800;font-size:20px;line-height:1.5;margin-bottom:12px;letter-spacing:.5px}
+.card-body{font-size:13px;line-height:1.8;opacity:.85;flex:1}
+.card-tags{position:absolute;bottom:18px;left:18px;right:18px;display:flex;flex-wrap:wrap;gap:4px}
+.card-tag{font-size:9px;padding:3px 8px;border-radius:10px;background:rgba(255,255,255,.25);color:inherit;font-weight:500;opacity:.8}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;z-index:999;opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;top:30px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
+.overlay.show{display:flex}
+.overlay .box{background:#fff;border-radius:16px;padding:24px 32px;text-align:center;min-width:200px}
+.overlay .box .spinner{width:36px;height:36px;border:3px solid #eee;border-top-color:#ff6b9d;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class=h>
+<h1>📕 小红书情感爆款生成器 Pro</h1>
+<div class=btns>
+<button class="btn btn-orange" onclick="batchExportPNG()">📥 批量下载PNG</button>
+<button class="btn btn-gray" onclick="clearAll()">🗑 清空</button>
 </div>
-</div><div class=p><div class=ca id=cards></div></div></div>
-<script>
-var cid=0,selTpl="t1",selBg="bg1";
-var V={t1:{n:"妈妈式治愈",m:["做大人累了回来做个孩子吧","世界给的子弹够多了","你不需要完美才值得被爱","你不用那么坚强偶尔也可以示弱","你值得被温柔以待","慢慢来我一直在这里陪着你","你可以哭但哭完要继续走","爱自己是一生最浪漫的开始"],s:["做大人太累了，每天要面对那么多压力和委屈。在这里你可以卸下所有伪装，做回那个单纯的孩子。","你不需要一直都那么坚强，偶尔软弱也是可以的。你的委屈我都懂。"]},t2:{n:"以前vs现在",m:["以前我总怕失去他现在我更怕弄丢自己","以前患得患失现在顺其自然","以前卑微讨好现在宁缺毋滥","以前围着他转现在围着自己转","以前委屈求全现在活得通透","以前以为爱是付出现在明白爱是相互"],s:["以前患得患失，现在顺其自然。把期待放在自己身上是安全感最好的来源。","以前总是我在付出，现在双向奔赴才有意义。好的爱情是相互成就不是单方面消耗。"]},t3:{n:"人间清醒",m:["不删除不拉黑不联系就是答案","他回消息的速度就是你在ta心里的位置","别在深夜做任何决定","放下不是放弃是新的开始","爱情不是生活的全部你才是","成年人感情不主动就是拒绝","学会及时止损是最高级的自律"],s:["他如果真的在乎你，会主动告诉你一切。别在不值得的人身上浪费情绪。","那些让你哭的事总有一天你会笑着说出来。时间不语却回答了所有问题。"]},t4:{n:"女性成长",m:["谢谢你让我变成更好的自己","离开错的人才能遇到对的自己","单身是最好的增值期","先谋生再谋爱顺序别搞反","经济独立是女生最大的底气","不要为了任何人放弃你的梦想","取悦自己才是头等大事"],s:["真正的成长是从不再依赖任何人开始的。经济独立和心理独立缺一不可。","不要因为一段失败的感情否定自己。不是你不够好，是他配不上你的好。"]},t5:{n:"深夜emo",m:["原来真正的心寒不是生气而是沉默","我以为只要够努力就能留住你","最后还是输给了新鲜感","有些人注定只能陪你走一段路","那段时间我真的差点熬不过来","原来真心真的会被辜负"],s:["你以为是突然走散的，其实人家早就想好了退路，只是你还在原地等。","那些深夜流的泪，总有一天会变成你嘴角的笑。时间从来不语却回答了所有问题。"]},t6:{n:"女生必看",m:["判断他是不是对的人的5个标准","恋爱中不能妥协的3个底线","女生一定要懂的恋爱真相","让感情越来越好的6个习惯","分手后快速走出来的4个方法","高情商女生都做对了什么"],s:["看他低谷时对你的态度，看他是否把你规划进未来，看他是否尊重你的选择。细节见人品日久见人心。","沟通是感情的润滑剂。学会表达需求而不是发泄情绪。保持独立比黏在一起更重要。"]},t7:{n:"互动投票",m:["分手后还能做朋友吗","男朋友这个行为你能忍吗","你觉得谈恋爱需要天天见面吗","恋爱中最加分的行为是什么","你会介意TA的过去吗","门当户对重要吗","情侣该不该看对方手机"],s:["快来评论区告诉我～","留下你的答案👇","一起聊聊这个话题～姐妹们怎么看？"]},t8:{n:"故事感悟",m:["分手那天我一个人去了我们第一次约会的地方","在一起三年他用10分钟说完了分手","收到他结婚消息的时候我正在加班","删掉他的那一刻我前所未有的轻松","妈妈问我为什么最近都不谈恋爱的了","他说的最后一句话我听了半年才懂"],s:["那个地方还是和以前一样美，只是身边的人不在了。回去的路上我哭了，但哭完之后突然觉得轻松了。原来放下就是从接受失去开始的。","他说我们不合适，可是三年为什么不早点说。后来我想通了，不是不合适，是不够爱。"]},t9:{n:"反差感语录",m:["嘴上说无所谓心里其实在意的要死","别看我整天笑嘻嘻深夜也会偷偷哭","表面我没事实际我快碎了","装大人装久了差点忘了自己才二十出头","白天人间值得晚上毁灭吧","朋友圈岁月静好内心兵荒马乱"],s:["白天嘻嘻哈哈好像什么都无所谓，晚上一个人躲在被子里偷偷emo。这就是成年人的两面性。","在朋友面前我永远是最淡定的那个。但只有我自己知道，每次深夜我都在想，到底什么时候才能做回那个可以撒娇的小孩。"]},t10:{n:"嘴替金句",m:["我脾气很好我妈你再说一遍","有些话说着说着就沉默了","和亲近的人吵架赢了却感觉输了","懂事的孩子背后都没人撑腰","每次想发脾气都在心里默念算了","成年人最大的默契你不问我不说"],s:["妈妈说我脾气大的时候，我本来想反驳的，但想了想她说的对。果然最了解你的人还是家人。","和越亲近的人说话越容易失控，因为知道他们不会离开，所以把最差的一面留给了最亲的人。"]},t11:{n:"成长对比",m:["从恋爱脑到人间清醒","从患得患失到安全感满满","从卑微讨好到被爱","从内耗崩溃到情绪稳定","从不被重视到被捧在手心","从害怕孤独到享受独处"],s:["以前患得患失，现在顺其自然。当你不再围着一个人转你就赢了。","以前总是我在付出，现在双向奔赴才有意义。"]},t12:{n:"温柔女生",m:["爱自己是终身浪漫的开始","你不用那么优秀做自己就好","温柔的女孩子运气都不会太差","愿你成为自己的太阳无需凭借谁的光","慢慢来谁不是翻山越岭去爱","取悦自己才是头等大事"],s:["每个女孩都是独一无二的。你的独特就是你的魅力。","你不需要完美才值得被爱。真实比完美更动人。"]},t13:{n:"两性科普",m:["关于性女生一定要知道的几件事","别不好意思这是正常的生理知识","情侣之间这件事比做爱更重要","女生一定要保护好自己的身体","关于避孕你必须知道的真相","男女生理差异你必须知道的事"],s:["身体是你自己的你有权利说不。不要因为爱一个人就委屈自己。","沟通比技巧重要舒服比花样长久安全感比激情珍贵。"]}};
-var BG={bg1:{n:"星夜紫",c:"linear-gradient(160deg,#1a1a3e,#2d2d6b,#3a3a6e)"},bg2:{n:"深海蓝",c:"linear-gradient(160deg,#1a1a3e,#2835a0,#3a4ab0)"},bg3:{n:"温柔粉",c:"linear-gradient(135deg,#fce4ec,#f8e8f0,#fff0f5)"},bg4:{n:"清新绿",c:"linear-gradient(160deg,#e8f5e9,#f1f8e9,#fff8e1)"},bg5:{n:"暖阳橙",c:"linear-gradient(135deg,#fff8e1,#fce4ec,#f3e5f5)"},bg6:{n:"梦幻彩",c:"linear-gradient(135deg,#e0f7fa,#f3e5f5,#fff9c4)"},bg7:{n:"极简白",c:"linear-gradient(135deg,#fff,#f8f9fa,#e9ecef)"},bg8:{n:"暗夜金",c:"linear-gradient(160deg,#2a2a3e,#26304e,#633493)"},bg9:{n:"樱花粉",c:"linear-gradient(135deg,#fce4ec,#fff0f5,#f3e8ff)"},bg10:{n:"薄荷绿",c:"linear-gradient(160deg,#e0f2f1,#e8f5e9,#f1f8e9)"},bg11:{n:"薰衣草",c:"linear-gradient(135deg,#f3e5f5,#e8eaf6,#ede7f6)"},bg12:{n:"落日红",c:"linear-gradient(135deg,#fbe9e7,#ffccbc,#ffe0b2)"}};
-var gA=function(a){return a[Math.floor(Math.random()*a.length)]};
-var EMO=function(t){var m={"t1":"👩","t2":"⚖️","t3":"💎","t4":"🌱","t5":"🌙","t6":"📌","t7":"💬","t8":"📖","t9":"🎭","t10":"🎤","t11":"📈","t12":"🌸","t13":"🧠"};return m[t]||"❤️";};
+</div>
+<div class=l>
+<div class=p>
+<div class=f><label>🎨 模板风格</label><div class=tg id=tplList></div></div>
+<div class=f><label>🎨 背景主题</label><div class=bgg id=bgList></div></div>
+<div class=f><label>📝 素材库（点击切换）</label><div class=cl id=contentList></div></div>
+<div class=br>
+<button class="btn btn-pink" id=btnGen>✨ 生成一张</button>
+<button class="btn btn-green" id=btnBatch>⚡ 批量生成</button>
+<input id=bcnt type=number value=10 min=1 max=200>
+<label style="font-size:11px;color:#888">张</label>
+</div>
+</div>
+<div class=p>
+<div class=ca id=cards><div class=em>👆 选择模板后点击"生成"或"批量生成"</div></div>
+</div>
+</div>
+<div class=toast id=toast></div>
+<div class=overlay id=overlay><div class=box><div class=spinner></div><div id=overlayMsg>正在导出...</div></div></div>
 
-var icons=["👩","⚖️","💎","🌱","💔","📖","💬","📸","🎭","🎤","📈","🌸","🧠"];
+<script>
+"use strict";
+var cid=0,selTpl="t1",selBg="bg1";
+
+var V={t1:{n:"妈妈式治愈·温暖陪伴",m:["做大人累了，回来做个孩子吧","世界给的子弹够多了","你不需要完美才值得被爱","你不用那么坚强偶尔也可以示弱","你值得被温柔以待","慢慢来我一直在这里陪着你","你可以哭但哭完要继续走","别怕天塌下来有妈妈给你顶着","你本身就是一份礼物","爱自己是一生最浪漫的开始"],s:["做大人太累了，每天要面对那么多压力和委屈。在这里你可以卸下所有伪装，做回那个单纯的孩子。","你不需要一直都那么坚强，偶尔软弱也是可以的。你的委屈我都懂，你的难过我都看在眼里。"]},t2:{n:"以前vs现在·人间清醒",m:["以前我总怕失去他，现在更怕弄丢自己","以前患得患失，现在顺其自然","以前卑微讨好，现在宁缺毋滥","以前围着他转，现在围着自己转","以前委屈求全，现在活得通透","以前以为爱是付出，现在明白爱是相互","以前把恋爱当全部，现在把自己当全部"],s:["以前患得患失，现在顺其自然。把期待放在自己身上是安全感最好的来源。","以前总是我在付出，现在双向奔赴才有意义。好的爱情是相互成就不是单方面消耗。"]},t3:{n:"人间清醒·金句",m:["不删除不拉黑不联系，就是答案","他回消息的速度，就是你在ta心里的位置","别在深夜做任何决定","放下不是放弃，是新的开始","爱情不是生活的全部，你才是","成年人感情不主动就是拒绝","学会及时止损是最高级的自律"],s:["他如果真的在乎你，会主动告诉你一切。别在不值得的人身上浪费情绪。","那些让你哭的事总有一天你会笑着说出来。时间不语却回答了所有问题。"]},t4:{n:"女性成长·觉醒",m:["谢谢你让我变成更好的自己","离开错的人才能遇到对的自己","单身是最好的增值期","先谋生再谋爱，顺序别搞反","经济独立是女生最大的底气","不要为了任何人放弃你的梦想","取悦自己才是头等大事"],s:["真正的成长是从不再依赖任何人开始的。经济独立和心理独立缺一不可。","不要因为一段失败的感情否定自己。不是你不够好，是他配不上你的好。"]},t5:{n:"深夜emo·情绪共鸣",m:["原来真正的心寒不是生气而是沉默","我以为只要够努力就能留住你","最后还是输给了新鲜感","有些人注定只能陪你走一段路","那段时间我真的差点熬不过来","原来真心真的会被辜负","最怕突然听懂一首歌"],s:["你以为是突然走散的，其实人家早就想好了退路，只是你还在原地等。","那些深夜流的泪，总有一天会变成你嘴角的笑。时间从来不语却回答了所有问题。"]},t6:{n:"女生必看·干货",m:["判断他是不是对的人的5个标准","恋爱中不能妥协的3个底线","女生一定要懂的恋爱真相","让感情越来越好的6个习惯","分手后快速走出来的4个方法","高情商女生都做对了什么","比男朋友更重要的7样东西"],s:["看他低谷时对你的态度，看他是否把你规划进未来，看他是否尊重你的选择。细节见人品日久见人心。","沟通是感情的润滑剂。学会表达需求而不是发泄情绪。保持独立比黏在一起更重要。"]},t7:{n:"互动投票·引流",m:["分手后还能做朋友吗","男朋友这个行为你能忍吗","你觉得谈恋爱需要天天见面吗","恋爱中最加分的行为是什么","你会介意TA的过去吗","门当户对重要吗","情侣该不该看对方手机"],s:["快来评论区告诉我～ 📝","留下你的答案👇 姐妹们一起聊聊！","等你来投票！💬"]},t8:{n:"故事·感悟分享",m:["分手那天我一个人去了我们第一次约会的地方","在一起三年他用10分钟说完了分手","收到他结婚消息的时候我正在加班","删掉他的那一刻我前所未有的轻松","妈妈问我为什么最近都不谈恋爱了","他说的最后一句话我听了半年才懂"],s:["那个地方还是和以前一样美，只是身边的人不在了。回去的路上我哭了，但哭完之后突然觉得轻松了。原来放下就是从接受失去开始的。","他说我们不合适，可是三年为什么不早点说。后来我想通了，不是不合适，是不够爱。"]},t9:{n:"反差感语录",m:["嘴上说无所谓，心里其实在意的要死","别看我整天笑嘻嘻，深夜也会偷偷哭","表面我没事，实际我快碎了","装大人装久了，差点忘了自己才二十出头","白天人间值得，晚上毁灭吧","朋友圈岁月静好，内心兵荒马乱"],s:["白天嘻嘻哈哈好像什么都无所谓，晚上一个人躲在被子里偷偷emo。这就是成年人的两面性。","在朋友面前我永远是最淡定的那个。但只有我自己知道，每次深夜我都在想，到底什么时候才能做回那个可以撒娇的小孩。"]},t10:{n:"嘴替金句",m:["我脾气很好，你再说一遍","有些话说着说着就沉默了","和亲近的人吵架，赢了却感觉输了","懂事的孩子背后都没人撑腰","每次想发脾气都在心里默念算了","成年人最大的默契：你不问我不说"],s:["妈妈说我脾气大的时候，我本来想反驳的，但想了想她说的对。果然最了解你的人还是家人。","和越亲近的人说话越容易失控，因为知道他们不会离开，所以把最差的一面留给了最亲的人。"]},t11:{n:"成长对比",m:["从前的我 VS 现在的我","刚毕业vs工作三年","二十岁的爱情观vs三十岁的爱情观","以前觉得天大的事现在回头看不过如此","一年前的你绝对想不到今天的你","过去的自己谢谢你那么努力"],s:["回头看才发现自己已经走了这么远。那些以为过不去的坎现在都成了脚下的路。","成长就是不断告别过去的自己。不是变得冷漠了而是学会了保护自己。"]},t12:{n:"温柔女生",m:["温柔不是软弱是选择","做个温柔但有力量的人","你永远是最好的自己","把温柔留给值得的人","慢慢喜欢你慢慢和你走","愿你被世界温柔以待"],s:["温柔是很高级的力量。不是不会生气而是选择用更好的方式表达。","做个温柔的人比做个锋利的人更需要勇气。因为温柔的前提是内心强大。"]},t13:{n:"两性科普",m:["男生说想静静是真的想静静","女生的潜台词你听懂了吗","恋爱脑 vs 理性脑","为什么越在乎越容易失去","暧昧期多久才合适","冷暴力和热暴力哪个更伤"],s:["男女思维真的有差异。理解差异不是为了改变对方而是为了更好地相处。","健康的感情需要边界感。可以很爱但不要失去自我。"]}};
+
+var TTAG={t1:["#治愈系","#温暖语录","#情感共鸣","#妈妈式安慰"],t2:["#人间清醒","#以前vs现在","#成长感悟","#清醒语录"],t3:["#人间清醒","#金句","#点醒","#通透"],t4:["#女性成长","#独立女性","#觉醒","#女生必看"],t5:["#深夜emo","#情绪","#共情","#治愈"],t6:["#女生必看","#恋爱干货","#干货分享","#情感技巧"],t7:["#互动投票","#情感话题","#评论区见","#讨论"],t8:["#情感故事","#真实经历","#感悟","#分手"],t9:["#反差感","#成年人","#两面性","#真实"],t10:["#嘴替","#金句","#句句扎心","#大实话"],t11:["#成长","#蜕变","#改变","#更好的自己"],t12:["#温柔","#女生","#细腻","#情感"],t13:["#两性","#科普","#恋爱","#认知"]};
+
+var BG={bg1:{n:"星夜紫",c:"linear-gradient(160deg,#2c2c5e,#4a4a8a,#5c5c9e)",dark:1},bg2:{n:"深海蓝",c:"linear-gradient(160deg,#2a3a6e,#4058a8,#5a70b8)",dark:1},bg3:{n:"温柔粉",c:"linear-gradient(135deg,#fce4ec,#f8e8f0,#fff0f5)",dark:0},bg4:{n:"清新绿",c:"linear-gradient(160deg,#e8f5e9,#f1f8e9,#fff8e1)",dark:0},bg5:{n:"暖阳橙",c:"linear-gradient(135deg,#fff8e1,#fce4ec,#f3e5f5)",dark:0},bg6:{n:"梦幻彩",c:"linear-gradient(135deg,#e0f7fa,#f3e5f5,#fff9c4)",dark:0},bg7:{n:"极简白",c:"linear-gradient(135deg,#fff,#f8f9fa,#e9ecef)",dark:0},bg8:{n:"暗夜金",c:"linear-gradient(160deg,#3a2a4e,#4a3068,#7a5098)",dark:1},bg9:{n:"樱花粉",c:"linear-gradient(135deg,#fce4ec,#fff0f5,#f3e8ff)",dark:0},bg10:{n:"薄荷绿",c:"linear-gradient(160deg,#e0f2f1,#e8f5e9,#f1f8e9)",dark:0},bg11:{n:"薰衣草",c:"linear-gradient(135deg,#3a2a5e,#4a3a8a,#6a4aaa)",dark:1},bg12:{n:"落日红",c:"linear-gradient(135deg,#fbe9e7,#ffccbc,#ffe0b2)",dark:0}};
+
+function gA(a){return a[Math.floor(Math.random()*a.length)]}
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("show")},2000)}
+function sO(m){document.getElementById("overlayMsg").textContent=m;document.getElementById("overlay").classList.add("show")}
+function hO(){document.getElementById("overlay").classList.remove("show")}
 function init(){
-  var h="",ks=Object.keys(V);
+  var ks=Object.keys(V),h="",icons=["👩","⚖️","💎","🌱","💔","📖","💬","📸","🎭","🎤","📈","🌸","💕"];
   for(var i=0;i<ks.length;i++){var k=ks[i];h+="<div class='to"+(k===selTpl?" s":"")+"' data-t='"+k+"'><span class=i>"+icons[i]+"</span>"+V[k].n+"</div>"}
   document.getElementById("tplList").innerHTML=h;
-  var b="",bks=Object.keys(BG);
-  for(var i=0;i<bks.length;i++){var bk=bks[i];b+="<div class='bgo"+(bk===selBg?" s":"")+"' data-bg='"+bk+"'><div class=bgp style='background:"+BG[bk].c+"'></div>"+BG[bk].n+"</div>"}
+  var bks=Object.keys(BG),b="";
+  for(var i=0;i<bks.length;i++){var k=bks[i];b+="<div class='bgo"+(k===selBg?" s":"")+"' data-bg='"+k+"'><div class=bgp style='background:"+BG[k].c+"'></div>"+BG[k].n+"</div>"}
   document.getElementById("bgList").innerHTML=b;
   renderContent();gen();
 }
 function renderContent(){
   var ct=V[selTpl],h="";
-  for(var i=0;i<ct.m.length;i++){h+="<div class=ci data-idx='"+i+"'><div class=cm>"+ct.m[i]+"</div><div class=cs>"+(ct.s[i]||"").substring(0,20)+"</div></div>"}
+  for(var i=0;i<ct.m.length;i++)h+="<div class=ci data-idx='"+i+"'><div class=t>"+ct.m[i]+"</div><div class=d>"+(ct.s[i]||"").substring(0,28)+"...</div></div>";
   document.getElementById("contentList").innerHTML=h;
 }
-function fmtBg(bg){
-  var b=BG[bg],isDark=bg==="bg1"||bg==="bg2"||bg==="bg8"||bg==="bg11"||bg==="bg12";
-  return {bg:b.c,tc:isDark?"color:rgba(255,255,255,.95)":"color:#333",sc:isDark?"color:rgba(255,255,255,.7)":"color:#555"};
+function bld(t,bg,m,s){
+  var b=BG[bg],d=b.dark,tc=d?"color:#fff":"color:#1a1a2e",sc=d?"color:rgba(255,255,255,.82)":"color:#444",tc2=d?"color:rgba(255,255,255,.75)":"color:rgba(0,0,0,.55)",tg=TTAG[t]||TTAG.t1,th="";
+  for(var i=0;i<tg.length;i++)th+="<span class=card-tag style='"+(d?"color:rgba(255,255,255,.7);background:rgba(255,255,255,.12)":"color:#c44569;background:rgba(244,68,105,.08)")+"'>"+tg[i]+"</span>";
+  cid++;
+  return "<div class=cw id='card"+cid+"'><div class=cd style='background:"+b.c+";"+tc2+"'><div class=card-title style='"+tc+"'>"+m+"</div><div class=card-body style='"+sc+"'>"+s+"</div><div class=card-tags>"+th+"</div></div><div class=cb><button class=png-btn data-id='card"+cid+"'>💾 PNG</button><button class=del-btn data-id='card"+cid+"'>🗑</button></div></div>";
 }
-function gen(){
-  var t=selTpl,m=gA(V[t].m),s=gA(V[t].s),b=fmtBg(selBg),id="card"+(++cid);
-  var h="<div class=cw id='"+id+"'><div class=cd style='background:"+b.bg+"'><div style='font-size:28px;opacity:.08;margin-bottom:6px'>"+EMO(selTpl)+"</div><div style='font-size:28px;opacity:.08;margin-bottom:6px'>"+EMO(selTpl)+"</div><div style='font-weight:700;font-size:19px;line-height:1.6;"+b.tc+";margin-bottom:10px'>"+m+"</div><div style='font-size:13px;line-height:1.7;"+b.sc+"'>"+s+"</div><div style='margin-top:auto;font-size:7px;opacity:.2;color:#999;text-align:center'>💕 点赞关注</div></div></div><div class=cb><button class=png-btn data-id='"+id+"'>PNG</button><button class=svg-btn data-id='"+id+"'>SVG</button><button class=del-btn data-id='"+id+"'>删除</button></div></div>";
-  document.getElementById("cards").innerHTML=h;
-}
+function gen(){var t=selTpl,bg=selBg;document.getElementById("cards").innerHTML=bld(t,bg,gA(V[t].m),gA(V[t].s))}
 function batchGen(){
-  var t=selTpl,a=document.getElementById("cards"),cnt=parseInt(document.getElementById("bcnt").value)||10;a.innerHTML="";
-  for(var i=0;i<cnt;i++){
-    var m=gA(V[t].m),s=gA(V[t].s),b=fmtBg(selBg),id="card"+(++cid);
-    var h="<div class=cw id='"+id+"'><div class=cd style='background:"+b.bg+"'><div style='font-weight:700;font-size:17px;line-height:1.6;"+b.tc+";margin-bottom:10px'>"+m+"</div><div style='font-size:11px;line-height:1.7;"+b.sc+"'>"+s+"</div></div><div class=cb><button class=png-btn data-id='"+id+"'>PNG</button><button class=svg-btn data-id='"+id+"'>SVG</button><button class=del-btn data-id='"+id+"'>删除</button></div></div>";
-    a.insertAdjacentHTML("beforeend",h);
-  }
+  var t=selTpl,bg=selBg,c=parseInt(document.getElementById("bcnt").value)||10;c=Math.min(c,200);c=Math.max(c,1);var h="";
+  for(var i=0;i<c;i++)h+=bld(t,bg,gA(V[t].m),gA(V[t].s));
+  document.getElementById("cards").innerHTML=h;toast("✅ 已生成 "+c+" 张卡片");
 }
-function toast(m){
-  var t=document.getElementById("toastMsg");
-  if(!t){t=document.createElement("div");t.id="toastMsg";t.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#fff;padding:6px 16px;border-radius:8px;font-size:11px;z-index:999;pointer-events:none";document.body.appendChild(t)}
-  t.textContent=m;t.style.display="block";clearTimeout(t._t);t._t=setTimeout(function(){t.style.display="none"},3000);
-}
-function exportOne(id,type){
-  var el=document.getElementById(id);if(!el)return;
+function clearAll(){document.getElementById("cards").innerHTML='<div class=em>👆 选择模板后点击"生成"或"批量生成"</div>';toast("已清空")}
+function expPNG(el){
   var cd=el.querySelector(".cd");if(!cd)return;
   var w=cd.offsetWidth,h=cd.offsetHeight,ss="",st=document.styleSheets;
-  for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++)ss+=r[j].cssText}catch(ex){}}
-  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='"+w+"' height='"+h+"'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml'><style>"+ss+"</style>"+cd.outerHTML+"</div></foreignObject></svg>";
-  if(type==="svg"){
-    var w1=window.open("","_blank");
-    w1.document.write("<html><body style='margin:0'><img src='data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)+"' style='max-width:100%'><p>右键另存为</p></body></html>");
-    w1.document.close();
-  } else {
-    var c=document.createElement("canvas");c.width=w*2;c.height=h*2;var ctx=c.getContext("2d");ctx.scale(2,2);
-    var img=new Image();
-    img.onload=function(){ctx.drawImage(img,0,0);c.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement("a");a.download="卡片_"+id+".png";a.href=u;a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)},'image/png');};
-    img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
-  }
+  for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++)ss+=r[j].cssText}catch(e){}}
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style>'+ss+'</style>'+cd.outerHTML+'</div></foreignObject></svg>';
+  var c=document.createElement("canvas");c.width=w*2;c.height=h*2;var cx=c.getContext("2d");cx.scale(2,2);
+  var img=new Image();
+  img.onload=function(){cx.drawImage(img,0,0);c.toBlob(function(b){var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="小红书_"+Date.now()+".png";document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)},"image/png")};
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
 }
-function downloadAll(){var btns=document.querySelectorAll(".png-btn");if(btns.length===0){alert("没有卡片可下载");return}toast("正在下载 "+btns.length+" 张PNG...");for(var i=0;i<btns.length;i++){setTimeout(function(idx){return function(){exportOne(btns[idx].getAttribute("data-id"),"png")}}(i),i*600)}}
-// Event listeners
+function expOne(cw,i){
+  return new Promise(function(rs){
+    var cd=cw.querySelector(".cd");if(!cd)return rs();
+    var w=cd.offsetWidth,h=cd.offsetHeight,ss="",st=document.styleSheets;
+    for(var j=0;j<st.length;j++){try{var r=st[j].cssRules;for(var k=0;k<r.length;k++)ss+=r[k].cssText}catch(e){}}
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style>'+ss+'</style>'+cd.outerHTML+'</div></foreignObject></svg>';
+    var c=document.createElement("canvas");c.width=w*2;c.height=h*2;var cx=c.getContext("2d");cx.scale(2,2);
+    var img=new Image();
+    img.onload=function(){cx.drawImage(img,0,0);c.toBlob(function(b){var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="小红书卡片_"+(i+1)+".png";document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);rs()},"image/png")};
+    img.onerror=function(){rs()};
+    img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
+  });
+}
+async function batchExportPNG(){
+  var cs=document.querySelectorAll("#cards .cw");if(!cs.length){toast("请先生成卡片");return}
+  sO("正在导出 "+cs.length+" 张...");await new Promise(function(r){setTimeout(r,300)});
+  for(var i=0;i<cs.length;i++){document.getElementById("overlayMsg").textContent="正在导出 "+(i+1)+"/"+cs.length+"...";await expOne(cs[i],i);await new Promise(function(r){setTimeout(r,120)})}
+  hO();toast("✅ 已下载 "+cs.length+" 张PNG！");
+}
 document.getElementById("tplList").addEventListener("click",function(e){var el=e.target.closest(".to");if(!el)return;document.querySelectorAll(".to").forEach(function(x){x.classList.remove("s")});el.classList.add("s");selTpl=el.getAttribute("data-t");renderContent();gen()});
 document.getElementById("bgList").addEventListener("click",function(e){var el=e.target.closest(".bgo");if(!el)return;document.querySelectorAll(".bgo").forEach(function(x){x.classList.remove("s")});el.classList.add("s");selBg=el.getAttribute("data-bg");gen()});
-document.getElementById("contentList").addEventListener("click",function(e){var el=e.target.closest(".ci");if(!el)return;gen()});
+document.getElementById("contentList").addEventListener("click",function(e){if(e.target.closest(".ci"))gen()});
 document.getElementById("btnGen").addEventListener("click",gen);
 document.getElementById("btnBatch").addEventListener("click",batchGen);
-document.getElementById("btnDownAll").addEventListener("click",downloadAll);
-document.getElementById("cards").addEventListener("click",function(e){var btn=e.target.closest("button");if(!btn)return;var id=btn.getAttribute("data-id");if(btn.classList.contains("del-btn")){var el=document.getElementById(id);if(el)el.remove();return}if(btn.classList.contains("png-btn"))exportOne(id,"png");if(btn.classList.contains("svg-btn"))exportOne(id,"svg")});
+document.getElementById("cards").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var id=b.getAttribute("data-id");if(b.classList.contains("del-btn")){var el=document.getElementById(id);if(el){el.remove();if(!document.querySelectorAll("#cards .cw").length)clearAll()}return}if(b.classList.contains("png-btn")){var el=document.getElementById(id);if(!el)return;toast("📥 正在下载...");expPNG(el)}});
 init();
-</script></body></html>
+</script>
+</body>
+</html>
