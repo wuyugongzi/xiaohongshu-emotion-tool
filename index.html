@@ -78,7 +78,38 @@ function init(){
     var k=keys[i];
     tplHtml+="<div class='to"+(k===selTpl?" s":"")+"' data-t='"+k+"'><span class=i>"+["👩","⚖️","💎","🌱","💔","📖","💬","📸","🎭","🎤","📈","🌸","🧠"][i]+"</span>"+V[k].n+"</div>";
   }
-  document.getElementById("tplList").innerHTML=tplHtml;
+  
+function batchExportAll(){
+  var btns=document.querySelectorAll(".png-btn");
+  if(btns.length===0){alert("没有卡片可导出");return;}
+  for(var i=0;i<btns.length;i++){
+    (function(idx){
+      setTimeout(function(){
+        var id=btns[idx].getAttribute("data-id");
+        triggerPng(id);
+      }, idx * 1000);
+    })(i);
+  }
+  var sty=document.getElementById("cardStatus");if(!sty){sty=document.createElement("div");sty.id="cardStatus";sty.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#fff;padding:6px 16px;border-radius:8px;font-size:11px;z-index:999";document.body.appendChild(sty)}sty.textContent="正在导出 "+btns.length+" 张，请允许弹窗";sty.style.display="block";
+}
+
+function triggerPng(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var cd=el.querySelector(".cd");
+  if(!cd)return;
+  var w=cd.offsetWidth,h=cd.offsetHeight;
+  var ss="";
+  var st=document.styleSheets;
+  for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++){ss+=r[j].cssText}}catch(ex){}}
+  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='"+w+"' height='"+h+"'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml'><style>"+ss+"</style>"+cd.outerHTML+"</div></foreignObject></svg>";
+  var c=document.createElement("canvas");c.width=w*2;c.height=h*2;
+  var ctx=c.getContext("2d");ctx.scale(2,2);
+  var img=new Image();
+  img.onload=function(){ctx.drawImage(img,0,0);var u=c.toDataURL("image/png");var w2=window.open("","_blank");w2.document.write("<html><body style='margin:0'><img src='"+u+"' style='max-width:100%'><p>右键另存为</p></body></html>");w2.document.close();};
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
+}
+document.getElementById("tplList").innerHTML=tplHtml;
 
   var bgHtml="";
   var bgKeys=Object.keys(BG);
@@ -194,36 +225,8 @@ document.getElementById("cards").addEventListener("click",function(e){
 });
 
 
-function batchExportAll(){
-  var btns=document.querySelectorAll(".png-btn");
-  if(btns.length===0){alert("没有卡片可导出");return;}
-  for(var i=0;i<btns.length;i++){
-    (function(idx){
-      setTimeout(function(){
-        var id=btns[idx].getAttribute("data-id");
-        triggerPng(id);
-      }, idx * 1000);
-    })(i);
-  }
-  var sty=document.getElementById("cardStatus");if(!sty){sty=document.createElement("div");sty.id="cardStatus";sty.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#fff;padding:6px 16px;border-radius:8px;font-size:11px;z-index:999";document.body.appendChild(sty)}sty.textContent="正在导出 "+btns.length+" 张，请允许弹窗";sty.style.display="block";
-}
 
-function triggerPng(id){
-  var el=document.getElementById(id);
-  if(!el)return;
-  var cd=el.querySelector(".cd");
-  if(!cd)return;
-  var w=cd.offsetWidth,h=cd.offsetHeight;
-  var ss="";
-  var st=document.styleSheets;
-  for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++){ss+=r[j].cssText}}catch(ex){}}
-  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='"+w+"' height='"+h+"'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml'><style>"+ss+"</style>"+cd.outerHTML+"</div></foreignObject></svg>";
-  var c=document.createElement("canvas");c.width=w*2;c.height=h*2;
-  var ctx=c.getContext("2d");ctx.scale(2,2);
-  var img=new Image();
-  img.onload=function(){ctx.drawImage(img,0,0);var u=c.toDataURL("image/png");var w2=window.open("","_blank");w2.document.write("<html><body style='margin:0'><img src='"+u+"' style='max-width:100%'><p>右键另存为</p></body></html>");w2.document.close();};
-  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
-}
+
 
 init();
 </script>
