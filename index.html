@@ -33,7 +33,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 .br{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap}
 .br input{width:56px;padding:5px 8px;border:1px solid #ddd;border-radius:6px;font-size:12px;text-align:center}
 .ca{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.cd{width:100%;aspect-ratio:3/4;border-radius:12px;overflow:hidden;position:relative;display:flex;flex-direction:column;padding:28px 18px 70px 18px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.cd{width:100%;aspect-ratio:3/4;border-radius:16px;overflow:hidden;position:relative;display:flex;flex-direction:column;padding:0;box-shadow:0 4px 20px rgba(0,0,0,.12)}.cd-inner{display:flex;flex-direction:column;padding:100px 36px 90px 36px;height:100%}
 .cw{margin-bottom:4px}
 .cw .cb{display:flex;gap:4px;margin-top:3px;justify-content:center}
 .cw .cb button{padding:3px 8px;font-size:10px;border:none;border-radius:4px;cursor:pointer;background:#f0f0f0;color:#666;font-weight:500}
@@ -45,10 +45,10 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 .ci:hover{background:#fff0f5;border-color:#ff6b9d}
 .ci .t{font-weight:600;font-size:12px}
 .ci .d{color:#aaa;font-size:10px;margin-top:1px}
-.card-title{font-weight:800;font-size:20px;line-height:1.5;margin-bottom:12px;letter-spacing:.5px}
-.card-body{font-size:13px;line-height:1.8;opacity:.85;flex:1}
-.card-tags{position:absolute;bottom:18px;left:18px;right:18px;display:flex;flex-wrap:wrap;gap:4px}
-.card-tag{font-size:9px;padding:3px 8px;border-radius:10px;background:rgba(255,255,255,.25);color:inherit;font-weight:500;opacity:.8}
+.card-badge{display:flex;align-items:center;justify-content:center;padding:8px 20px;border-radius:20px;font-size:15px;font-weight:600;margin-bottom:40px;align-self:center}.card-title{font-weight:800;font-size:38px;line-height:1.35;margin-bottom:24px;letter-spacing:0}
+.card-body{font-size:16px;line-height:1.9;opacity:.78;flex:1;margin-bottom:24px}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.card-action{display:flex;align-items:center;justify-content:center;gap:24px;padding:12px 0;border-radius:12px;margin-bottom:10px;font-size:14px;font-weight:600}
+.card-tag{font-size:11px;padding:4px 10px;border-radius:12px;font-weight:500}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;z-index:999;opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{opacity:1;top:30px}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
