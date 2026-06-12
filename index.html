@@ -1,162 +1,67 @@
-<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>小红书情感爆款批量生成器 Pro</title>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>小红书情感图文生成器</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f0f2f5;color:#333;padding:12px}
-.h{max-width:1200px;margin:0 auto 16px;padding:20px 24px;background:linear-gradient(135deg,#FF6B9D,#C44A8B 50%,#8B2F6E);border-radius:14px;color:#fff;position:relative;overflow:hidden}
-.h::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:rgba(255,255,255,.06);border-radius:50%}
-.h h1{font-size:22px;font-weight:700}.h p{margin-top:4px;opacity:.8;font-size:12px}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f0f2f5;padding:12px}
+.h{max-width:1200px;margin:0 auto 16px;padding:20px;background:linear-gradient(135deg,#FF6B9D,#C44A8B);border-radius:14px;color:#fff}
+.h h1{font-size:22px;font-weight:700}
 .l{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:16px}
 .p{background:#fff;border-radius:12px;padding:14px}
-.p h2{font-size:14px;font-weight:600;margin-bottom:10px;color:#444}
-.f{margin-bottom:10px}.f label{display:block;font-size:11px;font-weight:500;margin-bottom:3px;color:#888}
-.f input,.f textarea{width:100%;padding:6px 10px;border:1px solid #e8e8e8;border-radius:8px;font-size:12px;font-family:inherit;background:#fafafa}
-.f input:focus,.f textarea:focus{outline:none;border-color:#FF6B9D;background:#fff}
-.f textarea{resize:vertical;min-height:38px}
-.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-bottom:10px}
-.to{border:2px solid #eee;border-radius:8px;padding:6px 2px;text-align:center;cursor:pointer;font-size:10px;color:#999;background:#fafafa}
-.to.s,.to:hover{border-color:#FF6B9D;background:#fff0f5;color:#C44A8B}
-.to .i{font-size:12px;display:block}
-.bgg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px;max-height:150px;overflow-y:auto}
-.bgo{border:2px solid #eee;border-radius:6px;padding:4px 2px;text-align:center;cursor:pointer;font-size:9px;color:#999;height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.bgo.s,.bgo:hover{border-color:#FF6B9D}
-.bgo .bgp{width:100%;height:14px;border-radius:4px;margin-bottom:2px}
-.cl{max-height:280px;overflow-y:auto;margin-bottom:10px}
-.ci{padding:5px 8px;border:1px solid #f0f0f0;border-radius:6px;margin-bottom:3px;cursor:pointer}
-.ci:hover{background:#fff0f5;border-color:#FF6B9D}
-.ci .cm{font-size:12px;font-weight:500;color:#444}.ci .cs{font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.b{display:inline-block;padding:6px 12px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
-.b1{background:linear-gradient(135deg,#FF6B9D,#C44A8B);color:#fff}
-.b1:hover{transform:translateY(-1px)}
-.b2{background:#10b981;color:#fff}.b2:hover{transform:translateY(-1px)}
-.b3{background:#667eea;color:#fff}.b3:hover{transform:translateY(-1px)}
-.b4{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
-.bg{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-#bp{padding:8px 12px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;font-size:11px;color:#166534;display:none;margin-top:8px}
-#bp.s{display:block}
+.b{display:inline-block;padding:6px 12px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#FF6B9D,#C44A8B);color:#fff}
 .ca{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.em{grid-column:1/-1;text-align:center;padding:40px 20px;color:#bbb}
-.em .bi{font-size:40px;margin-bottom:8px}
 .cd{width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column;padding:22px 14px}
-.cd .tg1{position:absolute;top:12px;left:12px;background:linear-gradient(135deg,rgba(255,107,157,.4),rgba(200,80,192,.3));padding:2px 8px;border-radius:12px;font-size:9px;color:#ffb3d0}
 .cw{margin-bottom:10px}
-.cw .cb{display:flex;gap:4px;margin-top:4px;justify-content:center}
-.cw .cb button{padding:2px 5px;font-size:9px;border:none;border-radius:4px;cursor:pointer;background:#f0f0f0;color:#666}
-.cw .cb button:hover{background:linear-gradient(135deg,#FF6B9D,#C44A8B);color:#fff}
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.8);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;opacity:0;pointer-events:none;z-index:999}
-#toast.ts{opacity:1;transform:translateX(-50%) translateY(0)}
-.br{display:flex;gap:6px;align-items:center;margin-top:8px}
-.br input{width:50px;padding:4px 6px;border:1px solid #e8e8e8;border-radius:6px;font-size:11px;text-align:center}
-.br label{font-size:11px;color:#888}
-.ht{background:linear-gradient(135deg,#667eea,#764ba2);color:transparent;background-clip:text;-webkit-background-clip:text}
-.tag-hot{background:rgba(255,107,107,.2);color:#ff5252;padding:1px 6px;border-radius:8px;font-size:8px;margin-left:4px}
-</style></head><body>
-<div class=h><h1>✨ 小红书情感爆款批量生成器 <span class=ht>Pro</span></h1><p>🔥 基于@胡子爱吸猫 涨粉模板（月涨14.6w/爆文率100%） · 8大风格 · 前300爆款文案</p></div>
-
+.em{grid-column:1/-1;text-align:center;padding:40px;color:#bbb}
+</style>
+</head>
+<body>
+<div class=h><h1>小红书情感图文生成器</h1></div>
 <div class=l>
+<div class=p><button class="b" onclick="genCards()">生成</button></div>
 <div class=p>
-<h2>📝 创作面板</h2>
-<div class=f><label>🎨 爆款模板 <span class=tag-hot>🔥涨粉最快</span></label>
-<div class=tg id=tg style="grid-template-columns:repeat(3,1fr)">
-<div class="to s" data-t=t14><span class=i>👩</span>妈妈式治愈·温暖陪伴</div>
-<div class=to data-t=t7><span class=i>⚖️</span>以前vs现在·人间清醒</div>
-<div class=to data-t=t8><span class=i>💎</span>人间清醒·金句</div>
-<div class=to data-t=t9><span class=i>🌱</span>女性成长·觉醒</div>
-<div class=to data-t=t10><span class=i>💔</span>深夜emo·情绪共鸣</div>
-<div class=to data-t=t11><span class=i>📖</span>女生必看·干货</div>
-<div class=to data-t=t12><span class=i>💬</span>互动投票·引流</div>
-<div class=to data-t=t13><span class=i>📸</span>故事·感悟分享</div></div>
-<div class=to data-t=t15><span class=i>🎭</span>反差感语录</div>
-<div class=to data-t=t16><span class=i>🎤</span>嘴替金句</div></div>
-<div class=f><label>🖼️ 背景主题</label>
-<div class=bgg id=bgGrid>
-<div class="bgo s" data-bg=bg1><div class=bgp style="background:linear-gradient(160deg,#1a1a3e,#2d2d6b,#3a3a6e)"></div>星夜紫</div>
-<div class=bgo data-bg=bg2><div class=bgp style="background:linear-gradient(160deg,#1a1a3e,#2835a0,#3a4ab0)"></div>深海蓝</div>
-<div class=bgo data-bg=bg3><div class=bgp style="background:linear-gradient(135deg,#fce4ec,#f8e8f0,#fff0f5)"></div>温柔粉</div>
-<div class=bgo data-bg=bg4><div class=bgp style="background:linear-gradient(160deg,#e8f5e9,#f1f8e9,#fff8e1)"></div>清新绿</div>
-<div class=bgo data-bg=bg5><div class=bgp style="background:linear-gradient(135deg,#fff8e1,#fce4ec,#f3e5f5)"></div>暖阳橙</div>
-<div class=bgo data-bg=bg6><div class=bgp style="background:linear-gradient(135deg,#e0f7fa,#f3e5f5,#fff9c4)"></div>梦幻彩</div>
-<div class=bgo data-bg=bg7><div class=bgp style="background:linear-gradient(135deg,#fff,#f8f9fa,#e9ecef)"></div>极简白</div>
-<div class=bgo data-bg=bg8><div class=bgp style="background:linear-gradient(160deg,#2a2a3e,#26304e,#633493)"></div>暗夜金</div>
-<div class=bgo data-bg=bg9><div class=bgp style="background:linear-gradient(135deg,#fce4ec,#fff0f5,#f3e8ff)"></div>樱花粉</div>
-<div class=bgo data-bg=bg10><div class=bgp style="background:linear-gradient(160deg,#e0f2f1,#e8f5e9,#f1f8e9)"></div>薄荷绿</div>
-<div class=bgo data-bg=bg11><div class=bgp style="background:linear-gradient(135deg,#f3e5f5,#e8eaf6,#ede7f6)"></div>薰衣草</div>
-<div class=bgo data-bg=bg12><div class=bgp style="background:linear-gradient(135deg,#fbe9e7,#ffccbc,#ffe0b2)"></div>落日红</div>
-<div class=bgo data-bg=bg13><div class=bgp style="background:linear-gradient(135deg,#fdf2f8,#fce7f3,#fbcfe8)"></div>蜜桃粉</div>
-<div class=bgo data-bg=bg14><div class=bgp style="background:linear-gradient(160deg,#0f0c29,#302b63,#24243e)"></div>午夜蓝</div>
-<div class=bgo data-bg=bg15><div class=bgp style="background:linear-gradient(135deg,#667eea,#764ba2,#f093fb)"></div>极光紫</div>
-<div class=bgo data-bg=bg16><div class=bgp style="background:linear-gradient(160deg,#1a1a2e,#16213e,#0f3460)"></div>静谧蓝</div>
-<div class=bgo data-bg=bg17><div class=bgp style="background:linear-gradient(135deg,#f5f7fa,#c3cfe2,#e2e8f0)"></div>高级灰</div>
-<div class=bgo data-bg=bg18><div class=bgp style="background:linear-gradient(135deg,#ffecd2,#fcb69f,#ff9a9e)"></div>暖阳金</div>
-<div class=bgo data-bg=bg19><div class=bgp style="background:linear-gradient(135deg,#fef3c7,#fde68a,#fbbf24)"></div>奶油黄</div>
-<div class=bgo data-bg=bg20><div class=bgp style="background:linear-gradient(160deg,#f0fff0,#e8f5e9,#c8e6c9)"></div>春芽绿</div>
-</div></div>
-<div class=f><label>✏️ 自定义文案</label>
-<textarea id=mt rows=1 placeholder="主标题">做大人累了，回来做个孩子吧</textarea>
-<textarea id=st rows=1 placeholder="副文案（可选）" style=margin-top:4px>世界给的子弹够多了，不要再做自己的狙击手。</textarea></div>
-<div class=f><label>🏷️ 标签</label><input id=tag value="情感治愈"></div>
-<div class=f><label>📦 批量</label>
-<div class=br>
-<button class="b b1" onclick="gen()">🎯 生成</button>
-<button class="b b4" onclick=batchGen()>🚀 批量200</button>
-<input id=cnt type=number value=3 min=1 max=20 style="width:40px">
-<input id=bcnt type=number value=10 min=1 max=200 style="width:50px">
-<label>张</label></div></div>
-<div class=bg>
-<button class="b b2" id=expBtn>📥 SVG批量</button><button class="b3 b" id=pngBatch>🖼 PNG批量</button>
-<button class="b b3" onclick="copyAllText()">📋 复制全部文案</button>
+<div class=ca id=cards><div class=em><p>点击生成开始</p></div></div>
 </div>
-<div id=bp></div>
 </div>
-
-<div class=p style="position:relative">
-<div style="display:flex;align-items:center;justify-content:space-between">
-<h2>🖼️ 预览<span id=cc style="font-weight:400;font-size:12px;color:#999;margin-left:6px"></span></h2>
-<div style="font-size:10px;color:#999;display:flex;gap:8px"><span>💡点文案直接复用</span></div>
-</div>
-<div class=ca id=ca>
-<div class=em><div class=bi>🎴</div><p>选好内容点「生成」开始创作</p></div>
-</div>
-<div class=f style=margin-top:10px><label>📖 题库 <span id=tcount style=font-weight:400;font-size:11px;color:#999></span></label>
-<div class=cl id=clist></div></div>
-</div></div>
-
 <script>
-var V={
-t1:{n:"妈妈式治愈·温暖陪伴",m:["做大人累了，回来做个孩子吧","世界给的子弹够多了，不要再做自己的狙击手","你不需要完美才值得被爱","你不用那么坚强，偶尔也可以示弱","你值得被温柔以待"],s:["做大人太累了，每天要面对那么多压力和委屈。在这里你可以卸下所有伪装，做回那个单纯的孩子。我会一直陪着你，给你温暖和力量。","你不需要一直都那么坚强，偶尔软弱也是可以的。","你的委屈我都懂，你的难过我都看在眼里。来，抱抱你。"]},
-t2:{n:"以前vs现在·人间清醒",m:["以前我总怕失去他，现在我更怕弄丢自己","以前患得患失，现在顺其自然","以前卑微讨好，现在宁缺毋滥","以前围着他转，现在围着自己转","以前委屈求全，现在活得通透"],s:["以前：他为什么不回我消息。现在：不回就不回我忙着呢。当你不再围着一个人转，你就赢了。","以前：害怕失去他。现在：更怕弄丢了自己。把期待放在自己身上是安全感最好的来源。"]},
-t3:{n:"人间清醒·金句",m:["不删除不拉黑不联系就是答案","他回消息的速度就是你在ta心里的位置","别在深夜做任何决定","放下不是放弃，是新的开始","爱情不是生活的全部，你才是"],s:["他如果真的在乎你，会主动告诉你一切。别在不值得的人身上浪费情绪。","那些让你哭的事总有一天你会笑着说出来。时间不语却回答了所有问题。"]},
-t4:{n:"女性成长·觉醒",m:["谢谢你让我变成更好的自己","离开错的人才能遇到对的自己","单身是最好的增值期","先谋生再谋爱，顺序别搞反","经济独立是女生最大的底气"],s:["真正的成长是从不再依赖任何人开始的。经济独立和心理独立缺一不可。","不要因为一段失败的感情否定自己。不是你不够好，是他配不上你的好。"]},
-t5:{n:"深夜emo·情绪共鸣",m:["原来真正的心寒不是生气而是沉默","我以为只要够努力就能留住你","最后还是输给了新鲜感","有些人注定只能陪你走一段路","那段时间我真的差点熬不过来"],s:["你以为是突然走散的，其实人家早就想好了退路，只是你还在原地等。","那些深夜流的泪，总有一天会变成你嘴角的笑。"]},
-t6:{n:"女生必看·干货",m:["判断他是不是对的人的5个标准","恋爱中不能妥协的3个底线","女生一定要懂的恋爱真相","让感情越来越好的6个习惯","分手后快速走出来的4个方法"],s:["1.看他低谷时对你的态度。2.看他是否把你规划进未来。3.看他是否尊重你的选择。","沟通是感情的润滑剂。学会表达需求而不是发泄情绪。保持独立比黏在一起更重要。"]},
-t7:{n:"互动投票·引流",m:["分手后还能做朋友吗？","男朋友这个行为你能忍吗？","你觉得谈恋爱需要天天见面吗？","恋爱中最加分的行为是？","你会介意TA的过去吗？"],s:["快来评论区告诉我～","留下你的答案👇","一起聊聊这个话题～"]},
-t8:{n:"故事·感悟分享",m:["分手那天我一个人去了我们第一次约会的地方","在一起三年他用10分钟说完了分手","收到他结婚消息的时候我正在加班","删掉他的那一刻我前所未有的轻松","妈妈问我为什么最近都不谈恋爱了"],s:["那个地方还是和以前一样美，只是身边的人不在了。回去的路上我哭了，但哭完之后突然觉得轻松了。","他说我们不合适，可是三年为什么不早点说。后来我想通了，不是不合适，是不够爱。"]},
-t9:{n:"反差感语录",m:["嘴上说无所谓，心里其实在意的要死","别看我整天笑嘻嘻，深夜也会偷偷哭","表面：我没事  实际：我快碎了","装大人装久了，差点忘了自己才二十出头","白天：人间值得  晚上：毁灭吧"],s:["白天嘻嘻哈哈好像什么都无所谓，晚上一个人躲在被子里偷偷emo。这就是成年人的两面性。","在朋友面前我永远是最淡定的那个。但只有我自己知道，每次深夜我都在想，到底什么时候才能做回那个可以撒娇的小孩。"]},
-t10:{n:"嘴替金句",m:["我：我脾气很好  我妈：你再说一遍","有些话说着说着就沉默了，因为懂你的人不需要解释","和亲近的人吵架赢了，却感觉输得彻彻底底","懂事的孩子背后，都是没人撑腰的童年","每次想发脾气的时候，都在心里默念：算了算了"],s:["妈妈说我脾气大的时候，我本来想反驳的，但想了想她说的对。果然最了解你的人还是家人。","和越亲近的人说话越容易失控，因为知道他们不会离开，所以把最差的一面留给了最亲的人。"]}
-};
-var BG={
-b1:"linear-gradient(160deg,#1a1a3e,#2d2d6b,#3a3a6e)",
-b2:"linear-gradient(135deg,#fce4ec,#f8e8f0,#fff0f5)",
-b3:"linear-gradient(135deg,#fff8e1,#fce4ec,#f3e5f5)",
-b4:"linear-gradient(135deg,#667eea,#764ba2,#f093fb)"
-};
-var cid=0;
+var V={t1:{n:"妈妈式治愈",m:["做大人累了，回来做个孩子吧","你不需要完美才值得被爱"],s:["你不需要一直都那么坚强，偶尔软弱也是可以的","你的委屈我都懂，抱抱你"]},t2:{n:"以前vs现在",m:["以前患得患失，现在顺其自然","以前卑微讨好，现在宁缺毋滥"],s:["把期待放在自己身上是安全感最好的来源","先自沉稳，而后爱人"]},t3:{n:"反差感",m:["嘴上说无所谓心里其实在意的要死","表面我没事实际我快碎了"],s:["白天嘻嘻哈哈什么都无所谓，晚上一个人躲在被子里偷偷emo","成年人的崩溃都是静悄悄的"]}};
+var BG=["linear-gradient(160deg,#1a1a3e,#2d2d6b)","linear-gradient(135deg,#fce4ec,#f8e8f0)","linear-gradient(135deg,#667eea,#764ba2)","linear-gradient(160deg,#1a1a2e,#16213e)"];
+var ci=0;
 function gA(a){return a[Math.floor(Math.random()*a.length)]}
 function genCards(){
-  var a=document.getElementById('cards');a.innerHTML='';
-  var keys=Object.keys(V);
+  var a=document.getElementById("cards");a.innerHTML="";
   for(var i=0;i<3;i++){
-    var t=gA(keys);
-    var m=gA(V[t].m);
-    var s=gA(V[t].s);
-    cid++;
-    var html="<div class=cw id='card"+cid+"'><div class=cd style='background:"+BG[gA(Object.keys(BG))]+"'><div style='font-weight:700;font-size:17px;line-height:1.6;color:rgba(255,255,255,.95);margin-bottom:10px'>"+m+"</div><div style='font-size:11px;line-height:1.7;color:rgba(255,255,255,.7)'>"+s+"</div></div><div style='display:flex;gap:4px;justify-content:center;margin-top:4px'><button onclick='dlPNG(\"card"+cid+"\")'>🖼 PNG</button><button onclick='showSVG(\"card"+cid+"\")'>📥 SVG</button></div></div>";
-    a.insertAdjacentHTML('beforeend',html);
+    var t=gA(Object.keys(V));ci++;
+    var m=gA(V[t].m);var s=gA(V[t].s);var bg=gA(BG);
+    var html="<div class=cw id='c"+ci+"'><div class=cd style='background:"+bg+"'><div style='font-weight:700;font-size:17px;color:rgba(255,255,255,.95);margin-bottom:10px'>"+m+"</div><div style='font-size:11px;color:rgba(255,255,255,.7)'>"+s+"</div></div><div style='display:flex;gap:4px;justify-content:center;margin-top:4px'><button onclick='expPNG(\"c"+ci+"\")'>PNG</button><button onclick='expSVG(\"c"+ci+"\")'>SVG</button></div></div>";
+    a.insertAdjacentHTML("beforeend",html);
   }
 }
-function showSVG(id){var el=document.getElementById(id);var cd=el.querySelector('.cd');var ss='';var st=document.styleSheets;for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++){ss+=r[j].cssText}}catch(e){}}var svg='<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"900\" height=\"1200\"><foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\"><style>'+ss+'</style>'+cd.outerHTML+'</div></foreignObject></svg>';var w=window.open('','_blank');w.document.write('<html><body style=\"margin:0\"><img src=\"data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)+'\" style=\"max-width:100%\"><p>右键另存为</p></body></html>');w.document.close();}
-function dlPNG(id){var el=document.getElementById(id);var cd=el.querySelector('.cd');var w=cd.offsetWidth,h=cd.offsetHeight;var ss='';var st=document.styleSheets;for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++){ss+=r[j].cssText}}catch(e){}}var svg='<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"'+w+'\" height=\"'+h+'\"><foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\"><style>'+ss+'</style>'+cd.outerHTML+'</div></foreignObject></svg>';var c=document.createElement('canvas');c.width=w*2;c.height=h*2;var ctx=c.getContext('2d');ctx.scale(2,2);var img=new Image();img.onload=function(){ctx.drawImage(img,0,0);var u=c.toDataURL('image/png');var w2=window.open('','_blank');w2.document.write('<html><body style=\"margin:0\"><img src=\"'+u+'\" style=\"max-width:100%\"><p>✅ 右键另存为</p></body></html>');w2.document.close();};img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);}
+function expSVG(id){
+  var el=document.getElementById(id);var cd=el.querySelector(".cd");
+  var ss="";var st=document.styleSheets;
+  for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++){ss+=r[j].cssText}}catch(e){}}
+  var sv="<svg xmlns='http://www.w3.org/2000/svg' width='900' height='1200'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml'><style>"+ss+"</style>"+cd.outerHTML+"</div></foreignObject></svg>";
+  var w=window.open("","_blank");
+  w.document.write("<html><body style='margin:0'><img src='data:image/svg+xml;charset=utf-8,"+encodeURIComponent(sv)+"' style='max-width:100%'><p>右键另存为</p></body></html>");
+  w.document.close();
+}
+function expPNG(id){
+  var el=document.getElementById(id);var cd=el.querySelector(".cd");
+  var w=cd.offsetWidth,h=cd.offsetHeight;
+  var ss="";var st=document.styleSheets;
+  for(var i=0;i<st.length;i++){try{var r=st[i].cssRules;for(var j=0;j<r.length;j++){ss+=r[j].cssText}}catch(e){}}
+  var sv="<svg xmlns='http://www.w3.org/2000/svg' width='"+w+"' height='"+h+"'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml'><style>"+ss+"</style>"+cd.outerHTML+"</div></foreignObject></svg>";
+  var c=document.createElement("canvas");c.width=w*2;c.height=h*2;
+  var ctx=c.getContext("2d");ctx.scale(2,2);
+  var img=new Image();
+  img.onload=function(){ctx.drawImage(img,0,0);var u=c.toDataURL("image/png");var w2=window.open("","_blank");w2.document.write("<html><body style='margin:0'><img src='"+u+"' style='max-width:100%'><p>右键另存为</p></body></html>");w2.document.close();};
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(sv);
+}
 genCards();
-</script></body></html>
-
+</script>
+</body>
+</html>
