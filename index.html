@@ -114,8 +114,7 @@ function renderContent(){
   document.getElementById("contentList").innerHTML=h;
 }
 function bld(t,bg,m,s){
-  var b=BG[bg],d=b.dark,tc=d?"color:#fff":"color:#1a1a2e",sc=d?"color:rgba(255,255,255,.82)":"color:#444",tc2=d?"color:rgba(255,255,255,.75)":"color:rgba(0,0,0,.55)",tg=TTAG[t]||TTAG.t1,th="";
-  for(var i=0;i<tg.length;i++)th+="<span class=card-tag style='"+(d?"color:rgba(255,255,255,.7);background:rgba(255,255,255,.12)":"color:#c44569;background:rgba(244,68,105,.08)")+"'>"+tg[i]+"</span>";
+  var b=BG[bg],d=b.dark,tc=d?"color:#fff":"color:#1a1a2e",sc=d?"color:rgba(255,255,255,.82)":"color:#444",tc2=d?"color:rgba(255,255,255,.75)":"color:rgba(0,0,0,.55)",th="<span class=card-tag style='"+(d?"color:rgba(255,255,255,.7);background:rgba(255,255,255,.12)":"color:#c44569;background:rgba(244,68,105,.08)")+"'>👍 点赞</span><span class=card-tag style='"+(d?"color:rgba(255,255,255,.7);background:rgba(255,255,255,.12)":"color:#c44569;background:rgba(244,68,105,.08)")+"'>⭐ 关注</span><span class=card-tag style='"+(d?"color:rgba(255,255,255,.7);background:rgba(255,255,255,.12)":"color:#c44569;background:rgba(244,68,105,.08)")+"'>💾 收藏</span>";
   cid++;
   return "<div class=cw id='card"+cid+"'><div class=cd style='background:"+b.c+";"+tc2+"'><div class=card-title style='"+tc+"'>"+m+"</div><div class=card-body style='"+sc+"'>"+s+"</div><div class=card-tags>"+th+"</div></div><div class=cb><button class=png-btn data-id='card"+cid+"'>💾 PNG</button><button class=del-btn data-id='card"+cid+"'>🗑</button></div></div>";
 }
